@@ -3,6 +3,7 @@ using AppointmentScheduler.Models.ViewModels;
 using AppointmentScheduler.Utility;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,8 +20,8 @@ namespace AppointmentScheduler.Services
 
         public async Task<int> AddUpdate(AppointmentVM model)
         {
-            var startDate = DateTime.Parse(model.StartDate);
-            var endDate = DateTime.Parse(model.StartDate).AddMinutes(Convert.ToDouble(model.Duration));
+            DateTime startDate = DateTime.Parse(model.StartDate, CultureInfo.CreateSpecificCulture("en-EN"));
+            DateTime endDate = DateTime.Parse(model.StartDate, CultureInfo.CreateSpecificCulture("en-EN")).AddMinutes(Convert.ToDouble(model.Duration));
 
             if(model != null & model.Id > 0)
             {
@@ -30,7 +31,7 @@ namespace AppointmentScheduler.Services
             else
             {
                 // Create
-                Appointment appointment = new Appointment
+                Appointment appointment = new Appointment()
                 {
                     Title = model.Title,
                     Description = model.Description,
