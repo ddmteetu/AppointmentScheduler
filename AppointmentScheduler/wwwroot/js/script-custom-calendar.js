@@ -70,7 +70,6 @@ function InitializeCalendar() {
 
 function onShowModal(obj, isEventDetail) {
     if (isEventDetail != null) {
-
         $("#title").val(obj.title);
         $("#description").val(obj.description);
         $("#appointmentDate").val(obj.startDate);
@@ -78,8 +77,10 @@ function onShowModal(obj, isEventDetail) {
         $("#doctorId").val(obj.doctorId);
         $("#patientId").val(obj.patientId);
         $("#id").val(obj.id);
-
-        
+    }
+    else {
+        $("#appointmentDate").val(obj.startStr + " " + new moment().format("hh:mm A"));
+        $("#id").val(0);
     }
 
     $("#appointmentInput").modal("show");
